@@ -1,7 +1,9 @@
 import LoginForm from "@/features/auth/login-form"
+import { requireUnAuth } from "@/lib/auth-util"
 
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  await requireUnAuth();
   return (
     <LoginForm />
   )
