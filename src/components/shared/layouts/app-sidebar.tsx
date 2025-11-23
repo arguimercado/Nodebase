@@ -20,6 +20,7 @@ import {  DoorOpenIcon, FolderOpenIcon, HistoryIcon, KeyIcon, LogOutIcon, StarIc
 import { authClient } from "@/lib/auth-client";
 import { useTransition } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
 
 const menuItem = [
    {
@@ -51,6 +52,8 @@ const AppSidebar = () => {
    const router = useRouter();
    const pathname = usePathname();
    const [pending,setTransition] =  useTransition();
+   const {hasActiveSubscription,isLoading} = useHasActiveSubscription();
+   console.log("hasActiveSubscription",hasActiveSubscription);
 
    const handleLogout = () => {
       setTransition(async () => {
@@ -69,9 +72,9 @@ const AppSidebar = () => {
          return pathname === "/"
       else 
          return pathname.startsWith(url)
-     
-
    }
+
+   const handleCheckout = () => authClient.checkout({slug: "pro"})
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -112,17 +115,31 @@ const AppSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
          <SidebarMenu>
-            <SidebarMenuItem>
-               <SidebarMenuButton
-                  tooltip={"Upgraded to Pro"}
-                  className="btn-sidebar"
-               >
-                  <StarIcon className="size-4" />
-                  <span>Upgraded to Pro</span>
-               </SidebarMenuButton>
-            </SidebarMenuItem>
+            {!hasActiveSubscription && !isLoading && (
+               <SidebarMenuItem>
+                  <SidebarMenuButton
+                     tooltip={"Upgraded to Pro"}
+                     className="btn-sidebar"
+                     onClick={handleCheckout}
+                  >
+                     <StarIcon className="size-4" />
+                     <span>Upgraded to Pro</span>
+                  </SidebarMenuButton>
+               </SidebarMenuItem>
+            )}
+             <SidebarMenuItem>
+                  <SidebarMenuButton
+                     tooltip={"Billing Portal"}
+                     className="btn-sidebar"
+                     onClick={() => authClient.customer.portal()}
+                  >
+                     <StarIcon className="size-4" />
+                     <span>Billing Portal</span>
+                  </SidebarMenuButton>
+               </SidebarMenuItem>
          </SidebarMenu>
           <SidebarMenu>
+            
             <SidebarMenuItem>
                <SidebarMenuButton
                   tooltip={"Log out"}

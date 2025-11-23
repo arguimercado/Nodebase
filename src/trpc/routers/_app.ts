@@ -1,5 +1,5 @@
 import { inngest } from '@/inngest/client';
-import { createTRPCRouter, protectedProcedure } from '../init';
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from '../init';
 import prisma from "@/lib/prisma/db"
 
 const userModule = {
@@ -30,7 +30,7 @@ const workflowModule = {
 }
 
 const aiModule = {
-  test: protectedProcedure
+  test: premiumProcedure
     .mutation(async () => {
       await inngest.send({
         name: "ai/request"
