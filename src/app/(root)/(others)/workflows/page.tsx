@@ -7,12 +7,19 @@ import { Suspense } from "react";
 import {ErrorBoundary} from "react-error-boundary"
 
 import { WorkflowContainer, WorkflowList } from "./_features/components";
+import type { SearchParams } from "nuqs";
+import { workflowParams } from "@/globals/vars/params";
+import { workflowParamsLoader } from "./_features/servers/params-loader";
 
+type Props = {
+  searchParams: Promise<SearchParams>;
+}
 
-const WorkflowPage = async () => {
+const WorkflowPage = async ({searchParams} : Props) => {
   await requireAuth();
 
-  prefetchWorkflows();
+  const params = await workflowParamsLoader(searchParams);
+  prefetchWorkflows(params);
 
   return (
     <WorkflowContainer>
