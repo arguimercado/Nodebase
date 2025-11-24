@@ -1,5 +1,6 @@
 import { createTRPCRouter } from '../init';
-import { workflowsRouter } from '@/features/workflows/servers/routers';
+
+import { workflowsRouter } from '@/app/(root)/(others)/workflows/_features/servers/routers';
 
 
 

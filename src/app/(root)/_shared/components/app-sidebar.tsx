@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useTransition } from "react";
 import { usePathname,useRouter } from "next/navigation"
 
 import {
@@ -10,42 +11,19 @@ import {
    SidebarFooter,
    SidebarGroup,
    SidebarGroupContent,
+   SidebarGroupLabel,
    SidebarHeader,
    SidebarMenu,
    SidebarMenuButton,
    SidebarMenuItem
 } from "@/components/ui/sidebar";
-import {  DoorOpenIcon, FolderOpenIcon, HistoryIcon, KeyIcon, LogOutIcon, StarIcon } from "lucide-react";
-
-import { authClient } from "@/lib/auth-client";
-import { useTransition } from "react";
+import {  LogOutIcon, StarIcon } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
-import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
 
-const menuItem = [
-   {
-      title: "Workflows",
-      items: [
-         {
-            title: "Workflows",
-            icon: FolderOpenIcon,
-            url: "/workflows"
-         },
-         {
-            title: "Credentials",
-            icon: KeyIcon,
-            url: "/credentials"
-         },
-         {
-            title: "Executions",
-            icon: HistoryIcon,
-            url: "/executions"
-         }
+import { menuItem } from "@/globals/constants/constants";
+import { authClient } from "@/lib/auth-client";
+import { useHasActiveSubscription } from "@/globals/hooks/use-subscription";
 
-      ]
-   },
-   
-]
 
 const AppSidebar = () => {
 
@@ -91,6 +69,7 @@ const AppSidebar = () => {
          {menuItem.map((group) => (
             <SidebarGroup key={group.title}>
                <SidebarGroupContent>
+                  <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
                   <SidebarMenu>
                      {group.items.map((item) => (
                         <SidebarMenuItem key={item.title}>

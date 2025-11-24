@@ -22,7 +22,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 
-const LoginForm = () => {
+const useAuthLogin = () => {
   const router = useRouter();
 
   const form = useForm<LoginFormValue>({
@@ -33,7 +33,7 @@ const LoginForm = () => {
     },
   });
 
-  const handleSubmit = async (data: LoginFormValue) => {
+   const handleSubmit = async (data: LoginFormValue) => {
     await authClient.signIn.email(
       {
         email: data.email,
@@ -55,6 +55,12 @@ const LoginForm = () => {
   };
 
   const isPending = form.formState.isSubmitting;
+
+  return { form, handleSubmit, isPending };
+}
+
+const LoginForm = () => {
+  const { form, handleSubmit, isPending } = useAuthLogin();
 
   return (
     <Card className="max-w-sm w-full">

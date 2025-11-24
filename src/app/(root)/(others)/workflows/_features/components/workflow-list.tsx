@@ -1,8 +1,9 @@
 "use client";
-import { useSuspenseWorkflow } from "../hooks/useWorkflow";
+
+import { useSuspenseGetWorkflows } from "../hooks/useWorkflow";
 
 const WorkflowList = () => {
-  const workflows = useSuspenseWorkflow();
+  const workflows = useSuspenseGetWorkflows();
 
   return (
 		<p>
