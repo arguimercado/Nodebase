@@ -1,9 +1,29 @@
 "use client";
-import { EntityButton, EntityHeaderContainer, EntityHeaderTitle } from "@/components/shared/entities/entity-header";
+import { EntityButton, EntityContent, EntityHeaderContainer, EntityHeaderTitle } from "@/components/shared/entities/entity-header";
 import { useCreateWorkflow } from "../hooks/useWorkflow";
 import { useRouter } from "next/navigation";
 import { useUpgradeModal } from "@/globals/hooks/use-upgrade-modal";
 import EntitySearch from "@/components/shared/entities/entity-search";
+import { useEntitySearch } from "@/globals/hooks/use-entity-search";
+import { useWorkflowsParams } from "../hooks/useWorkflowParams";
+
+
+
+
+const WorkflowSearch = () => {
+
+  const [params,setParams] = useWorkflowsParams();
+  const {searchValue,onSearchValue} = useEntitySearch({
+    params,
+    setParams
+  })
+  
+  return (
+    <EntitySearch placeholder="Search workflows" value={searchValue} onChange={onSearchValue} />
+  )
+}
+
+
 
 const WorkflowHeader = ({ disabled }: { disabled?: boolean }) => {
 
@@ -25,12 +45,13 @@ const WorkflowHeader = ({ disabled }: { disabled?: boolean }) => {
   return (
     <>
 			{modal}
-      <EntityHeaderContainer>
-				<EntityHeaderTitle title="Workflows" description="Create and manage your workflows" />
-        <EntitySearch value="" onChange={() => {}} placeholder="Search workflows" />
-				<EntityButton label="New Workflow"  isCreating={isPending} onNew={handleCreateNew} />		
+      <EntityHeaderContainer className="mb-4">
+        <EntityContent>
+				  <EntityHeaderTitle title="Workflows" description="Create and manage your workflows" />
+				  <EntityButton label="New Workflow"  isCreating={isPending} onNew={handleCreateNew} />		
+        </EntityContent>
+        <WorkflowSearch />
 			</EntityHeaderContainer>
-
     </>
   );
 };

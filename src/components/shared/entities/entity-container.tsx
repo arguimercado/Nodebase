@@ -15,6 +15,7 @@ const EntityContainer = ({ children, header, search, pagination }: EntityContain
       </div>
       <div className="flex flex-col gap-y-4">
         {children}
+        {pagination}
       </div>
     </div>
   )

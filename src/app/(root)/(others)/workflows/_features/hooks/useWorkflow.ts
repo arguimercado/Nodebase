@@ -1,13 +1,13 @@
-import { workflowParams } from "@/globals/vars/params";
+"use client" 
 import { useTRPC } from "@/trpc/client"
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { useQueryStates } from "nuqs";
 import { toast } from "sonner";
+import { useWorkflowsParams } from "./useWorkflowParams";
 
 export const useSuspenseGetWorkflows = () => {
    
    const trpc = useTRPC();
-   const [params] = useQueryStates(workflowParams);
+   const [params] = useWorkflowsParams();
    return useSuspenseQuery(trpc.workflows.getMany.queryOptions(params));
 }
 

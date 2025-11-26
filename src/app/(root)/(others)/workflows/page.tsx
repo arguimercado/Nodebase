@@ -8,7 +8,6 @@ import {ErrorBoundary} from "react-error-boundary"
 
 import { WorkflowContainer, WorkflowList } from "./_features/components";
 import type { SearchParams } from "nuqs";
-import { workflowParams } from "@/globals/vars/params";
 import { workflowParamsLoader } from "./_features/servers/params-loader";
 
 type Props = {

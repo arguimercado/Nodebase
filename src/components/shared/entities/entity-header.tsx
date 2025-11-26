@@ -28,12 +28,20 @@ export const EntityHeaderContainer = ({
 }: EntityContainerProps) => {
   return (
     <div
-      className={`flex flex-row justify-between item-center gap-x-4 ${className}`}
+      className={`flex flex-col gap-y-4 ${className}`}
       {...props}
     >
       {children}
     </div>
   );
+};
+
+
+interface EntityContentProps extends React.ComponentProps<"div"> {
+  children: React.ReactNode;
+}
+export const EntityContent = ({ children, ...props }: EntityContentProps) => {
+  return <div className="flex flex-row gap-2 justify-between" {...props}>{children}</div>;
 };
 
 export const EntityHeaderTitle = ({

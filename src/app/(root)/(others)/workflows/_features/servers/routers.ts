@@ -60,18 +60,18 @@ export const workflowsRouter = createTRPCRouter({
       .query(async ({ ctx, input }) => {
          const { page, pageSize, search } = input;
          
-         const whereClause = { userId: ctx.auth.user.id } as any;
+         const whereClause = { 
+            userId: ctx.auth.user.id,
+            name: {
+                     contains: search,
+                     mode: "insensitive"
+                  } } as any;
          const [items,totalCount] = await Promise.all([
             prisma.workflow.findMany({
                skip: (page - 1) * pageSize,
                take: pageSize,
                where: {
                   ...whereClause,
-                  name: {
-                     contains: search,
-                     mode: "insensitive"
-                  }
-
                },
                orderBy: {
                   updatedAt: "desc"
