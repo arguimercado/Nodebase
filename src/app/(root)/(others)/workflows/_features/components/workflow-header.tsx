@@ -19,7 +19,10 @@ const WorkflowSearch = () => {
   })
   
   return (
-    <EntitySearch placeholder="Search workflows" value={searchValue} onChange={onSearchValue} />
+    <EntitySearch 
+      placeholder="Search workflows" 
+      value={searchValue} 
+      onChange={onSearchValue} />
   )
 }
 

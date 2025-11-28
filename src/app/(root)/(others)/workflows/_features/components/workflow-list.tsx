@@ -4,6 +4,7 @@ import { useSuspenseGetWorkflows } from "../hooks/useWorkflow";
 
 const WorkflowList = () => {
   const workflows = useSuspenseGetWorkflows();
+  
 
   return (
 		<p>
