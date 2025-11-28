@@ -14,13 +14,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FieldGroup } from "@/components/ui/field";
-import InputField from "@/components/shared/input-field";
+
 import SocialForm from "./social-form";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { InputField } from "@/components/shared/inputs";
 
 const useAuthLogin = () => {
   const router = useRouter();

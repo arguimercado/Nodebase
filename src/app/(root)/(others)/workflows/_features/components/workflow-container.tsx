@@ -7,7 +7,6 @@ const WorkflowContainer = ({children} : {children: React.ReactNode}) => {
   return (
     <EntityContainer
       header={<WorkflowHeader />}
-      pagination={<WorkflowPagination />}
     >
       {children}
     </EntityContainer>

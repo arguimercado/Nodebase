@@ -1,7 +1,7 @@
 
 import { Control, Controller, FieldValues, Path } from "react-hook-form"
-import { Field, FieldLabel, FieldError } from "../ui/field"
-import { Input } from "../ui/input"
+import { Field, FieldLabel, FieldError } from "../../ui/field"
+import { Input } from "../../ui/input"
 
 interface InputFieldProps<T extends FieldValues> {
   control: Control<T>
