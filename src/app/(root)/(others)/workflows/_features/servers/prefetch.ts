@@ -1,11 +1,14 @@
-
-import {prefetch,trpc} from "@/trpc/server"
-import { inferInput } from "@trpc/tanstack-react-query";
+import type { inferInput } from "@trpc/tanstack-react-query";
+import { prefetch, trpc } from "@/trpc/server";
 
 type Input = inferInput<typeof trpc.workflows.getMany>;
 
 export const prefetchWorkflows = async (params: Input) => {
-   //add timer delay to simulate network latency
-   await new Promise(resolve => setTimeout(resolve, 1000));
-   return prefetch(trpc.workflows.getMany.queryOptions(params));
+  //add timer delay to simulate network latency
+ 
+  return prefetch(trpc.workflows.getMany.queryOptions(params));
+};
+
+export const prefetchWorkflow = async (id: string) => {
+   return prefetch(trpc.workflows.getO.queryOptions({id}));
 }
