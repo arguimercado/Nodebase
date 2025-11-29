@@ -36,7 +36,6 @@ const WorkflowPage = async ({ searchParams }: Props) => {
               />}>
                 <section className="w-full px-4">
                   <WorkflowList />
-
                 </section>
             </ErrorBoundary>
           </HydrateClient>
