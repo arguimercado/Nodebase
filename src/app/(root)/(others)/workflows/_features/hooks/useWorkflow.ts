@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useTRPC } from "@/trpc/client";
 import { useWorkflowsParams } from "./useWorkflowParams";
 
+
 export const useSuspenseGetWorkflows = () => {
   const trpc = useTRPC();
   const [params] = useWorkflowsParams();
@@ -40,8 +41,10 @@ export const useRemoveWorkflow = () => {
          onSuccess: (data) => {
             toast.success(`Workflow "${data.name}" removed successfully!`);
             queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions({}));
-            queryClient.invalidateQueries(trpc.workflows.getSingle.queryOptions({id: data.id}));
+            queryClient.invalidateQueries(trpc.workflowEditor.getSingle.queryOptions({id: data.id}));
          }
       })
    )
 }
+
+
