@@ -32,6 +32,12 @@ interface AlertDialogContextType {
 
 const AlertDialogContext = React.createContext<AlertDialogContextType | null>(null)
 
+/**
+ * Retrieve the AlertDialog context for showing and controlling alert dialogs.
+ *
+ * @returns The context object that exposes `showAlert` to display an alert dialog.
+ * @throws Error if called outside of an `AlertDialogProvider`.
+ */
 export function useAlertDialog() {
    const context = React.useContext(AlertDialogContext)
    if (!context) {
@@ -50,6 +56,14 @@ const getButtonLabels = (buttonType: ButtonType) => {
    }
 }
 
+/**
+ * Provides context and UI for displaying a global alert dialog.
+ *
+ * Exposes a `showAlert(options)` function via context to open a modal with a title, description, configurable button type, and optional OK/Cancel callbacks.
+ *
+ * @param children - Child elements to render inside the provider
+ * @returns A React element that supplies AlertDialogContext and renders the alert dialog UI bound to that context
+ */
 export function AlertDialogProvider({ children }: { children: React.ReactNode }) {
    const [state, setState] = React.useState<AlertDialogState>({
       isOpen: false,
