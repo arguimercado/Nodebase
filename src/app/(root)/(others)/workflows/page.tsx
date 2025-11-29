@@ -25,7 +25,7 @@ const WorkflowPage = async ({ searchParams }: Props) => {
   return (
     <>
       <EntityContainer header={<WorkflowHeader />} />
-      <Suspense fallback={<DataLoader message="Loading Workflow..." />}>
+      <Suspense fallback={<DataLoader message="Loading Workflow Edit..." />}>
         <HydrateClient>
           <ErrorBoundary
             fallback={
