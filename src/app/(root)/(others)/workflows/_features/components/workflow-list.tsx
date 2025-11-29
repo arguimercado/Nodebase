@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { WorkflowIcon } from "lucide-react";
+import WorkflowMenu from "./workflow-menu";
 
 const WorkflowList = () => {
 
@@ -65,6 +66,14 @@ const WorkflowList = () => {
         <p>{new Date(row.original.updatedAt).toLocaleDateString()}</p>
       ),
     },
+    {
+      id: "actions",
+      header: () => <HeaderColumn alignment="right">Actions</HeaderColumn>,
+      cell: ({ row }) => {
+        const id = row.original.id;
+        return (<WorkflowMenu id={id} />);
+      }
+    }
   ];
 
   
