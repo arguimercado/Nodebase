@@ -22,6 +22,8 @@ const WorkflowPage = async ({ searchParams }: Props) => {
   const params = await workflowParamsLoader(searchParams);
   prefetchWorkflows(params);
 
+  
+
   return (
     <>
       <EntityContainer

@@ -13,6 +13,7 @@ import {
 } from "@/components/shared/grids/d-grid-provider";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { WorkflowIcon } from "lucide-react";
 
 const WorkflowList = () => {
 
@@ -25,6 +26,16 @@ const WorkflowList = () => {
   const selectedIds = Object.keys(rowSelection).filter(id => rowSelection[id])
 
   const columns: ColumnDef<(typeof workflows.data.items)[number]>[] = [
+    {
+      id: "icon",
+      cell: ({ row }) => {
+        return (
+          <div>
+            <WorkflowIcon className="h-6 w-6 text-gray-500" />
+          </div>
+        )
+      }
+    },
     {
       accessorKey: "name",
       header: () => <HeaderColumn alignment="left">Name</HeaderColumn>,
@@ -67,9 +78,7 @@ const WorkflowList = () => {
 
     }
 
-    const pagination: PaginationProps = {
-      pageCount
-    }
+    
   return (
     <>
       <DGridProvider
