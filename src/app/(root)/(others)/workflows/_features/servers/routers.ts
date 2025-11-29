@@ -3,13 +3,15 @@ import { generateSlug } from "random-word-slugs";
 import { createTRPCRouter, premiumProcedure, protectedProcedure } from "@/trpc/init";
 import * as z from "zod";
 import { PAGINATION } from "@/config/constants";
+import { workflowFormSchema } from "../types/schema";
 
 export const workflowsRouter = createTRPCRouter({
-   create: premiumProcedure.mutation(async ({ ctx }) => {
+   create: premiumProcedure
+      .input(workflowFormSchema)
+      .mutation(async ({ ctx, input }) => {
       const data = {
-         name: generateSlug(3, { format: "title" }),
+         name: input.name,
          userId: ctx.auth.user.id,
-
       }
 
       return prisma.workflow.create({ data })
