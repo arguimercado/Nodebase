@@ -3,18 +3,28 @@ import { PAGINATION } from "@/config/constants";
 import prisma from "@/lib/prisma/db";
 import {
   createTRPCRouter,
-  premiumProcedure,
   protectedProcedure,
 } from "@/trpc/init";
 import { workflowFormSchema } from "../types/schema";
+import { NodeType } from "@/generated/prisma/enums";
+
+
 
 export const workflowsRouter = createTRPCRouter({
-  create: premiumProcedure
+  create: protectedProcedure
     .input(workflowFormSchema)
     .mutation(async ({ ctx, input }) => {
       const data = {
         name: input.name,
         userId: ctx.auth.user.id,
+        nodes: {
+          create: {
+            type: NodeType.INITIAL,
+            position: {x: 0, y: 0},
+            name: NodeType.INITIAL,
+            
+          }
+        }
       };
 
       return prisma.workflow.create({ data });

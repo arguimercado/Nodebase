@@ -25,3 +25,6 @@ WARN [mprocs::app] Ignore input event: FocusLost
 WARN [mprocs::app] Ignore input event: FocusGained
 ERROR [mprocs::error] Error: channel closed
 ERROR [mprocs::error] Error: channel closed
+ERROR [portable_pty::win::psuedocon] CreateProcessW `"\"npm run dev\"\0"` in cwd `Some("D:\\Projects\\Modern Web\\nextjs\\nodebase\0")` failed: The system cannot find the file specified. (os error 2)
+ERROR [mprocs::error] Error: channel closed
+ERROR [mprocs::error] Error: channel closed
