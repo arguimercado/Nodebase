@@ -5,12 +5,12 @@ import { PlusIcon } from "lucide-react";
 import { memo, useState } from "react";
 import WorkflowNode from "@/components/shared/nodes/workflow-node";
 import { PlaceholderNode } from "@/components/ui/react-flow/placeholder-node";
-import NodeSelector from "./node-selector";
+import NodeSelectorSheet from "../../../app/(root)/(editor)/workflows/_features/components/node-selector";
 
 export const InitialNodes = memo((props: NodeProps) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
   return (
-    <NodeSelector open={selectorOpen} onOpenChange={setSelectorOpen}>
+    <NodeSelectorSheet open={selectorOpen} onOpenChange={setSelectorOpen}>
       <WorkflowNode 
         showToolbar={false}
       >
@@ -24,7 +24,7 @@ export const InitialNodes = memo((props: NodeProps) => {
         </PlaceholderNode>
       </WorkflowNode>
 
-    </NodeSelector>
+    </NodeSelectorSheet>
   );
 });
 
