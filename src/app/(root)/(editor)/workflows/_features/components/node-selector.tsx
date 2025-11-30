@@ -85,23 +85,28 @@ const NodeTypeButton = ({ nodeType, onSelect }: NodeTypeButtonProps) => {
   );
 };
 
-const NodeSelectorSheet = ({ open, onOpenChange, children }: NodeSelectorProps) => {
-  const { setNodes, getNodes, screenToFlowPosition } = useReactFlow();
+const NodeSelectorSheet = ({
+  open,
+  onOpenChange,
+  children,
+}: NodeSelectorProps) => {
+  const { setNodes, screenToFlowPosition } = useReactFlow();
 
   const handleNodeSelect = useCallback(
     (selectionType: NodeTypeOption) => {
-      const node = getNodes();
-      if (selectionType.type === NodeType.MANUAL_TRIGGER) {
-        const hasManualTrigger = node.some(
-          (n) => n.type === NodeType.MANUAL_TRIGGER,
-        );
-        if (hasManualTrigger) {
-          toast.error("A Manual Trigger node already exists in the workflow.");
-          return;
-        }
-      }
-      
       setNodes((ns) => {
+        if (selectionType.type === NodeType.MANUAL_TRIGGER) {
+          const hasManualTrigger = ns.some(
+            (n) => n.type === NodeType.MANUAL_TRIGGER,
+          );
+          if (hasManualTrigger) {
+            toast.error(
+              "A Manual Trigger node already exists in the workflow.",
+            );
+            return ns;
+          }
+        }
+
         const hasInitialTrigger = ns.some((n) => n.type === NodeType.INITIAL);
 
         const centerX = window.innerWidth / 2;
@@ -127,7 +132,7 @@ const NodeSelectorSheet = ({ open, onOpenChange, children }: NodeSelectorProps) 
       });
       onOpenChange(false);
     },
-    [getNodes, onOpenChange, screenToFlowPosition, setNodes],
+    [onOpenChange, screenToFlowPosition, setNodes],
   );
 
   return (
@@ -143,17 +148,19 @@ const NodeSelectorSheet = ({ open, onOpenChange, children }: NodeSelectorProps) 
           </SheetDescription>
         </SheetHeader>
         {triggerNodes.map((nodeType) => (
-          <NodeTypeButton 
-            key={nodeType.type} 
-            nodeType={nodeType} 
-            onSelect={handleNodeSelect} />
+          <NodeTypeButton
+            key={nodeType.type}
+            nodeType={nodeType}
+            onSelect={handleNodeSelect}
+          />
         ))}
         <div>
           {executionNodes.map((nodeType) => (
-             <NodeTypeButton 
-            key={nodeType.type} 
-            nodeType={nodeType} 
-            onSelect={handleNodeSelect} />
+            <NodeTypeButton
+              key={nodeType.type}
+              nodeType={nodeType}
+              onSelect={handleNodeSelect}
+            />
           ))}
         </div>
       </SheetContent>

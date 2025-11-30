@@ -1,4 +1,5 @@
 "use client";
+import { useAtomValue } from "jotai";
 import { SaveIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,7 +13,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-
+import { useWorkflowUpdate } from "../hooks/useWorkflow";
+import { editorAtom } from "../store/atom";
 
 const EditorBreadcrumbs = ({ workflowId }: { workflowId: string }) => {
   const pathname = usePathname();
@@ -27,7 +29,8 @@ const EditorBreadcrumbs = ({ workflowId }: { workflowId: string }) => {
       const label =
         segment === workflowId
           ? workflowId
-          : segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " ");
+          : segment.charAt(0).toUpperCase() +
+            segment.slice(1).replace(/-/g, " ");
 
       return {
         href,
@@ -65,9 +68,25 @@ const EditorBreadcrumbs = ({ workflowId }: { workflowId: string }) => {
 };
 
 const EditorSaveButton = ({ workflowId }: { workflowId: string }) => {
+  const editor = useAtomValue(editorAtom);
+  const { mutateAsync: saveWorkflow, isPending } = useWorkflowUpdate();
+
+  const handleSave = async () => {
+    if (!editor) return;
+
+    const nodes = editor.getNodes();
+    const edges = editor.getEdges();
+
+    await saveWorkflow({
+      id: workflowId,
+      nodes,
+      edges,
+    });
+  };
+
   return (
     <div className="ml-auto">
-      <Button variant={"success"} onClick={() => {}}>
+      <Button variant={"success"} onClick={handleSave} disabled={isPending}>
         <SaveIcon className="size-4" />
         Save Workflow
       </Button>
