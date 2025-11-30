@@ -27,6 +27,10 @@ const HttpRequestNode = memo((props: NodeProps<HttpRequestNodeType>) => {
     setOpenSettings(true);
   };
 
+  const handleSubmit = (data: HttpRequestNodeData) => {
+    setOpenSettings(false);
+  }
+
   return (
     <>
       <HttpRequestSettingsDialog 
@@ -35,6 +39,7 @@ const HttpRequestNode = memo((props: NodeProps<HttpRequestNodeType>) => {
       defaultBody={nodeData.body}
       open={openSettings}
       onOpenChange={setOpenSettings}
+      onSubmit={handleSubmit}
     />
     <BaseExecutionNode
       {...props}

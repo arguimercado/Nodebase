@@ -47,8 +47,9 @@ export const HttpRequestSettingsDialog = ({
   open,
   onOpenChange,
   defaultEndpoint,
-  defaultMethod,
+  defaultMethod = "GET",
   defaultBody,
+  onSubmit,
 }: IProps) => {
   const form = useForm<HttpRequestNodeFormValues>({
     resolver: zodResolver(httpRequestNodeSchema),
@@ -61,6 +62,7 @@ export const HttpRequestSettingsDialog = ({
 
   const handleSubmit = (value: HttpRequestNodeFormValues) => {
     console.log("Submitted values:", value);
+    onSubmit?.(value);
   };
 
   return (

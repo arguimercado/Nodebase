@@ -9,7 +9,7 @@ import {
   BaseNode,
   BaseNodeContent,
 } from "@/components/ui/react-flow/base-node";
-import { NodeStatusIndicator } from "@/components/ui/react-flow/node-status-indicator";
+import { NodeStatus, NodeStatusIndicator } from "@/components/ui/react-flow/node-status-indicator";
 import WorkflowNode from "../workflow-node";
 
 interface BaseExecutionNodeProps extends NodeProps {

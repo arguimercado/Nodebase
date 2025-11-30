@@ -9,7 +9,7 @@ import { ManualTriggerSettingsDialog } from "./settings-dialog";
 
 export const ManualTriggerNode = memo((props: NodeProps) => {
   const [openSetting, setOpenSetting] = useState(false);
-  const status: NodeStatus = "loading"; //TODO
+  const status: NodeStatus = "initial"; //TODO
   const handleOpenSetting = () => {
     setOpenSetting(true);
   };

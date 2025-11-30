@@ -93,5 +93,5 @@ const BaseTriggerNode = memo(
   },
 );
 
-BaseTriggerNode.displayName = "BaseTriggernNode";
+BaseTriggerNode.displayName = "BaseTriggerNode";
 export default BaseTriggerNode;
