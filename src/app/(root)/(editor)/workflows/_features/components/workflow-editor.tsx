@@ -1,6 +1,4 @@
 "use client";
-
-
 import { useSuspenseWorkflow } from "../hooks/useWorkflow";
 import EditorBoard from "./editor-board";
 import EditorTitle from "./editor-title";

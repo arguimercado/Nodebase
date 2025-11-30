@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSuspenseWorkflow, useUpdateWorkflow } from "../hooks/useWorkflow";
+import { useSuspenseWorkflow, useWorkflowUpdateName } from "../hooks/useWorkflow";
 
 type TitleFormValues = {
   name: string;
@@ -14,7 +14,7 @@ type TitleFormValues = {
 const EditorTitle = ({ workflowId }: { workflowId: string }) => {
 
   const { data: workflow } = useSuspenseWorkflow(workflowId);
-  const { mutateAsync: updateWorkflow } = useUpdateWorkflow();
+  const { mutateAsync: updateWorkflow } = useWorkflowUpdateName();
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 

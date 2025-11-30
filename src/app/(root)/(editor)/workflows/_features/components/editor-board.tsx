@@ -15,21 +15,21 @@ import {
 } from "@xyflow/react";
 import { nodeComponents } from "@/config/node-component";
 import "@xyflow/react/dist/style.css";
+import { useSetAtom } from "jotai";
 import { useCallback, useState } from "react";
+import { editorAtom } from "../store/atom";
 import AddNodeButton from "./add-node-button";
 
 interface EditorBoardProps {
- 
   initialNodes: Node[];
   initialEdges?: Edge[];
 }
 
-const EditorBoard = ({
-  initialNodes,
-  initialEdges = [],
-}: EditorBoardProps) => {
+const EditorBoard = ({ initialNodes, initialEdges = [] }: EditorBoardProps) => {
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
+
+  const setEditor = useSetAtom(editorAtom);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -57,6 +57,8 @@ const EditorBoard = ({
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeComponents}
+        onInit={setEditor}
+       
         fitView
       >
         <Background />
